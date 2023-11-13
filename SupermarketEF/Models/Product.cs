@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace SupermarketEF.Models
 {
-    public  class Products
+    public  class Product
     {
       public int Id { get; set; }
-        public String Name { get; set; }
+        public string Name { get; set; }
         [Column(TypeName ="decimal(6,2)")]
         public decimal Price { get; set; }
         public int Stock { get; set; }
