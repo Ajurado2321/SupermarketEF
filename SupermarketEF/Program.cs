@@ -1,10 +1,33 @@
-﻿namespace SupermarketEF
+﻿using SupermarketEF.Data;
+using SupermarketEF.Models;
+
+namespace SupermarketEF
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            using SupermarketContext context = new SupermarketContext();
+            Category oilCategory = new Category()
+            {
+                Name = "Oil",
+                Description = "Oil Category"
+            };
+            context.Categories.Add(oilCategory);
+            var grainCategory = context.Categories
+                .Where(p => p.Name =="Grains")
+                .FirstOrDefault();
+            if (grainCategory is Category)
+            {
+                grainCategory.Description = "New description apllied";
+            }
+                context.SaveChanges();
+            var categories = context.Categories.OrderBy(p => p.Name);
+           
+            foreach (var category in categories)
+            {
+                Console.WriteLine($"{category.Name} | {category.Description}");
+            }
         }
     }
 }
